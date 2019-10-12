@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:youtube/telas/Biblioteca.dart';
+import 'package:youtube/telas/EmAlta.dart';
+import 'package:youtube/telas/Inicio.dart';
+import 'package:youtube/telas/Inscricao.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -6,8 +10,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  int _indiceAtual = 0;
+
   @override
   Widget build(BuildContext context) {
+
+    List<Widget> telas = [
+      Inicio(),
+      EmAlta(),
+      Inscricao(),
+      Biblioteca()
+    ];
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -45,8 +60,37 @@ class _HomeState extends State<Home> {
 
         ],
       ) ,
-      body: Container(
-
+      body: telas[_indiceAtual],
+      bottomNavigationBar: BottomNavigationBar(
+          //o type é mudadado pra shifting quando tem mais de 4 bottom navigation bar item
+        // o type shifting muda de cor da navigation bar de acordo com o background color do item selecionado da navbar
+          currentIndex: _indiceAtual,
+          onTap: (indice){
+            setState(() {
+              _indiceAtual = indice;
+              print(indice);
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          fixedColor: Colors.red,
+          items: [
+            BottomNavigationBarItem(
+              title: Text("Início"),
+              icon: Icon(Icons.home)
+            ),
+            BottomNavigationBarItem(
+                title: Text("Em alta"),
+                icon: Icon(Icons.whatshot)
+            ),
+            BottomNavigationBarItem(
+                title: Text("Inscrições"),
+                icon: Icon(Icons.subscriptions)
+            ),
+            BottomNavigationBarItem(
+                title: Text("Biblioteca"),
+                icon: Icon(Icons.folder)
+            ),
+          ]
       ),
     );
   }
