@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube/Api.dart';
+import 'package:youtube/CustomSearchDelegate.dart';
 import 'package:youtube/telas/Biblioteca.dart';
 import 'package:youtube/telas/EmAlta.dart';
 import 'package:youtube/telas/Inicio.dart';
@@ -15,12 +16,15 @@ class _HomeState extends State<Home> {
 
 
   int _indiceAtual = 0;
+  String _resultado = "";
 
   @override
   Widget build(BuildContext context) {
 
+
+
     List<Widget> telas = [
-      Inicio(),
+      Inicio(_resultado),
       EmAlta(),
       Inscricao(),
       Biblioteca()
@@ -38,27 +42,31 @@ class _HomeState extends State<Home> {
           height: 22,
         ),
         actions: <Widget>[
+
           IconButton(
-            icon: Icon(Icons.videocam),
-            onPressed: (){
-              print("acao: videocam");
-            },
-          ),
-
-            IconButton(
               icon: Icon(Icons.search),
-              onPressed: (){
-              print("acao: pesquisa");
-                }
-             ),
-
-
-             IconButton(
-             icon: Icon(Icons.account_circle),
-            onPressed: (){
-            print("acao: conta");
-            },
+              onPressed: () async{
+                String res = await showSearch(context: context, delegate: CustomSearchDelegate());
+                setState(() {
+                  _resultado = res;
+                });
+              },
           ),
+
+//          IconButton(
+//            icon: Icon(Icons.videocam),
+//            onPressed: (){
+//              print("acao: videocam");
+//            },
+//          ),
+//
+//
+//             IconButton(
+//             icon: Icon(Icons.account_circle),
+//            onPressed: (){
+//            print("acao: conta");
+//            },
+//          ),
 
 
         ],
