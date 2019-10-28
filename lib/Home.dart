@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube/Api.dart';
 import 'package:youtube/telas/Biblioteca.dart';
 import 'package:youtube/telas/EmAlta.dart';
 import 'package:youtube/telas/Inicio.dart';
@@ -10,6 +11,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
 
   int _indiceAtual = 0;
 
@@ -60,7 +63,10 @@ class _HomeState extends State<Home> {
 
         ],
       ) ,
-      body: telas[_indiceAtual],
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: telas[_indiceAtual],
+      ),
       bottomNavigationBar: BottomNavigationBar(
           //o type é mudadado pra shifting quando tem mais de 4 bottom navigation bar item
         // o type shifting muda de cor da navigation bar de acordo com o background color do item selecionado da navbar
